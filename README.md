@@ -12,6 +12,8 @@
 ## Lista de tarefas:
 
 - [ ] Remover do application.yaml o profile fixo (linhas 1 a 3), deve ser passado para o container ao rodar a aplicação
+- [ ] Adicionar banner do projeto
+- [ ] Verificar possibilidade de multimodulo
 
 ## Referencias:
 

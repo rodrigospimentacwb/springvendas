@@ -2,6 +2,8 @@
 
 <p>Projeto de loja virtual para estudo do framework Spring Boot utilizando java 11.</p>
 
+ **** <b>Em contrução, iniciado 29/08/2021</b> ****
+
 ## Tecnologias utilizadas:
 
 - Ubuntu 20.04.3 LTS

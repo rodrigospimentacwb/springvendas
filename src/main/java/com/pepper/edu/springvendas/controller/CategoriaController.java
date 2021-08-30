@@ -1,22 +1,27 @@
 package com.pepper.edu.springvendas.controller;
 
 import com.pepper.edu.springvendas.model.CategoriaEntity;
+import com.pepper.edu.springvendas.service.CategoriaService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<CategoriaEntity> listar(){
+    private final CategoriaService categoriaService;
 
-        CategoriaEntity cat1 = new CategoriaEntity(1,"Informática");
-        CategoriaEntity cat2 = new CategoriaEntity(2,"Escritório");
-        return List.of(cat1,cat2);
+    public CategoriaController(CategoriaService categoriaService) {
+        this.categoriaService = categoriaService;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable Integer id){
+        CategoriaEntity categoria = categoriaService.buscar(id);
+        return ResponseEntity.ok().body(categoria);
     }
 
 }

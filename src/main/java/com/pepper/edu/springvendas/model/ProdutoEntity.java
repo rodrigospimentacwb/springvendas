@@ -4,8 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CATEGORIA")
-public class CategoriaEntity implements Serializable {
+@Table(name = "PRODUTO")
+public class ProdutoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,16 +23,22 @@ public class CategoriaEntity implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+    private Double preco;
 
-    @ManyToMany(mappedBy = "categorias")
-    private List<ProdutoEntity> produtos = new ArrayList<ProdutoEntity>();
+    @ManyToMany
+    @JoinTable(
+            name = "PRODUTO_CATEGORIA",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<CategoriaEntity> categorias = new ArrayList<CategoriaEntity>();
 
-    public CategoriaEntity(){
+    public ProdutoEntity() {
     }
 
-    public CategoriaEntity(Integer id, String nome) {
+    public ProdutoEntity(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
@@ -50,19 +57,23 @@ public class CategoriaEntity implements Serializable {
         this.nome = nome;
     }
 
-    public List<ProdutoEntity> getProdutos() {
-        return produtos;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setProdutos(List<ProdutoEntity> produtos) {
-        this.produtos = produtos;
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public List<CategoriaEntity> getCategorias() {
+        return categorias;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoriaEntity that = (CategoriaEntity) o;
+        ProdutoEntity that = (ProdutoEntity) o;
         return Objects.equals(id, that.id);
     }
 

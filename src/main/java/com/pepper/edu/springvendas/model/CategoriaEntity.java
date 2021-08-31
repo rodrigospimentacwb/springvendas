@@ -1,5 +1,7 @@
 package com.pepper.edu.springvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class CategoriaEntity implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     private List<ProdutoEntity> produtos = new ArrayList<ProdutoEntity>();
 

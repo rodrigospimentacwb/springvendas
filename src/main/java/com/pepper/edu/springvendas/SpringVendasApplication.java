@@ -1,8 +1,12 @@
 package com.pepper.edu.springvendas;
 
 import com.pepper.edu.springvendas.model.CategoriaEntity;
+import com.pepper.edu.springvendas.model.CidadeEntity;
+import com.pepper.edu.springvendas.model.EstadoEntity;
 import com.pepper.edu.springvendas.model.ProdutoEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
+import com.pepper.edu.springvendas.repository.CidadeRepository;
+import com.pepper.edu.springvendas.repository.EstadoRepository;
 import com.pepper.edu.springvendas.repository.ProdutoRepository;
 import com.pepper.edu.springvendas.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,12 @@ public class SpringVendasApplication implements CommandLineRunner {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
+
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringVendasApplication.class, args);
@@ -44,5 +54,18 @@ public class SpringVendasApplication implements CommandLineRunner {
 
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        EstadoEntity est1 = new EstadoEntity(null, "Minas Gerais");
+        EstadoEntity est2 = new EstadoEntity(null, "São Paulo");
+
+        CidadeEntity c1 = new CidadeEntity(null, "Uberlândia", est1);
+        CidadeEntity c2 = new CidadeEntity(null, "São Paulo", est2);
+        CidadeEntity c3 = new CidadeEntity(null, "Campinas", est2);
+
+        est1.getCidades().addAll(Arrays.asList(c1));
+        est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+        estadoRepository.saveAll(Arrays.asList(est1, est2));
+        cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
     }
 }

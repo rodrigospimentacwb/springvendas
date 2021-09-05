@@ -1,5 +1,6 @@
 package com.pepper.edu.springvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pepper.edu.springvendas.enums.TipoClienteEnum;
 
 import javax.persistence.CollectionTable;
@@ -31,6 +32,7 @@ public class ClienteEntity implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<EnderecoEntity> enderecos = new ArrayList<EnderecoEntity>();
 

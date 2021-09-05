@@ -1,5 +1,7 @@
 package com.pepper.edu.springvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,7 @@ public class EstadoEntity implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "estado")
     private List<CidadeEntity> cidades = new ArrayList<CidadeEntity>();
 

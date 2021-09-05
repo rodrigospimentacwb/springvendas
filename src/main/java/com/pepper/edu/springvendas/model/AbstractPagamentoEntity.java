@@ -1,6 +1,7 @@
 package com.pepper.edu.springvendas.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pepper.edu.springvendas.enums.EstadoPagamentoEnum;
 
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public abstract class AbstractPagamentoEntity implements Serializable {
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
-    @JsonBackReference
+    @JsonIgnore
     private PedidoEntity pedido;
 
     public AbstractPagamentoEntity() {

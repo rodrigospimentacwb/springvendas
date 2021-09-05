@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -39,6 +40,9 @@ public class ClienteEntity implements Serializable {
     @ElementCollection
     @CollectionTable(name="TELEFONE")
     private Set<String> telefones = new HashSet<String>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<PedidoEntity> pedidos = new ArrayList<PedidoEntity>();
 
     public ClienteEntity() {
     }
@@ -107,6 +111,13 @@ public class ClienteEntity implements Serializable {
         this.telefones = telefones;
     }
 
+    public List<PedidoEntity> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<PedidoEntity> pedidos) {
+        this.pedidos = pedidos;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,4 +130,6 @@ public class ClienteEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

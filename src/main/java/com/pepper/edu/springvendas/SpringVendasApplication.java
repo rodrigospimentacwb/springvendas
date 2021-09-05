@@ -1,23 +1,31 @@
 package com.pepper.edu.springvendas;
 
+import com.pepper.edu.springvendas.enums.EstadoPagamentoEnum;
 import com.pepper.edu.springvendas.enums.TipoClienteEnum;
 import com.pepper.edu.springvendas.model.CategoriaEntity;
 import com.pepper.edu.springvendas.model.CidadeEntity;
 import com.pepper.edu.springvendas.model.ClienteEntity;
 import com.pepper.edu.springvendas.model.EnderecoEntity;
 import com.pepper.edu.springvendas.model.EstadoEntity;
+import com.pepper.edu.springvendas.model.PagamentoComBoletoEntity;
+import com.pepper.edu.springvendas.model.PagamentoComCartaoEntity;
+import com.pepper.edu.springvendas.model.AbstractPagamentoEntity;
+import com.pepper.edu.springvendas.model.PedidoEntity;
 import com.pepper.edu.springvendas.model.ProdutoEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
 import com.pepper.edu.springvendas.repository.CidadeRepository;
 import com.pepper.edu.springvendas.repository.ClienteRepository;
 import com.pepper.edu.springvendas.repository.EnderecoRepository;
 import com.pepper.edu.springvendas.repository.EstadoRepository;
+import com.pepper.edu.springvendas.repository.PagamentoRepository;
+import com.pepper.edu.springvendas.repository.PedidoRepository;
 import com.pepper.edu.springvendas.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -40,6 +48,12 @@ public class SpringVendasApplication implements CommandLineRunner {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringVendasApplication.class, args);
@@ -89,5 +103,21 @@ public class SpringVendasApplication implements CommandLineRunner {
 
         clienteRepository.saveAll(Arrays.asList(cli1));
         enderecoRepository.saveAll(Arrays.asList(e1, e2));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        PedidoEntity ped1 = new PedidoEntity(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+        PedidoEntity ped2 = new PedidoEntity(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
+
+        AbstractPagamentoEntity pagto1 = new PagamentoComCartaoEntity(null, EstadoPagamentoEnum.QUITADO, ped1, 6);
+        ped1.setPagamento(pagto1);
+
+        AbstractPagamentoEntity pagto2 = new PagamentoComBoletoEntity(null, EstadoPagamentoEnum.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
+        ped2.setPagamento(pagto2);
+
+        cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+
+        pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+        pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
     }
 }

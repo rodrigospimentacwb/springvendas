@@ -1,5 +1,6 @@
 package com.pepper.edu.springvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pepper.edu.springvendas.enums.TipoClienteEnum;
 
@@ -42,6 +43,7 @@ public class ClienteEntity implements Serializable {
     private Set<String> telefones = new HashSet<String>();
 
     @OneToMany(mappedBy = "cliente")
+    @JsonBackReference
     private List<PedidoEntity> pedidos = new ArrayList<PedidoEntity>();
 
     public ClienteEntity() {

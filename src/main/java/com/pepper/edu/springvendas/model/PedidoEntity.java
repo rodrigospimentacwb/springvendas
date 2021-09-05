@@ -1,5 +1,9 @@
 package com.pepper.edu.springvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,12 +29,16 @@ public class PedidoEntity  implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date instante;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private AbstractPagamentoEntity pagamento;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;
 

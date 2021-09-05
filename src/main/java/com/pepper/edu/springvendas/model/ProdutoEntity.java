@@ -1,6 +1,7 @@
 package com.pepper.edu.springvendas.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,9 +48,11 @@ public class ProdutoEntity implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedidoEntity> itens = new HashSet<ItemPedidoEntity>();
 
+    @JsonIgnore
     public List<PedidoEntity> getPedidos() {
       List<PedidoEntity> pedidos = new ArrayList<PedidoEntity>();
         for (ItemPedidoEntity x : itens) {

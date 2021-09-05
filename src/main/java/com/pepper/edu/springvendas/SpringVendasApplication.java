@@ -1,14 +1,18 @@
 package com.pepper.edu.springvendas;
 
+import com.pepper.edu.springvendas.enums.TipoClienteEnum;
 import com.pepper.edu.springvendas.model.CategoriaEntity;
 import com.pepper.edu.springvendas.model.CidadeEntity;
+import com.pepper.edu.springvendas.model.ClienteEntity;
+import com.pepper.edu.springvendas.model.EnderecoEntity;
 import com.pepper.edu.springvendas.model.EstadoEntity;
 import com.pepper.edu.springvendas.model.ProdutoEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
 import com.pepper.edu.springvendas.repository.CidadeRepository;
+import com.pepper.edu.springvendas.repository.ClienteRepository;
+import com.pepper.edu.springvendas.repository.EnderecoRepository;
 import com.pepper.edu.springvendas.repository.EstadoRepository;
 import com.pepper.edu.springvendas.repository.ProdutoRepository;
-import com.pepper.edu.springvendas.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +34,12 @@ public class SpringVendasApplication implements CommandLineRunner {
 
     @Autowired
     private CidadeRepository cidadeRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringVendasApplication.class, args);
@@ -67,5 +77,17 @@ public class SpringVendasApplication implements CommandLineRunner {
 
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+        ClienteEntity cli1 = new ClienteEntity(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoClienteEnum.PESSOAFISICA);
+
+        cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+        EnderecoEntity e1 = new EnderecoEntity(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+        EnderecoEntity e2 = new EnderecoEntity(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+
+        cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+        clienteRepository.saveAll(Arrays.asList(cli1));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2));
     }
 }

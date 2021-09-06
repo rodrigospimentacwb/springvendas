@@ -6,6 +6,7 @@ import com.pepper.edu.springvendas.repository.CategoriaRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,9 @@ public class CategoriaService {
         } catch (DataIntegrityViolationException e){
             throw new com.pepper.edu.springvendas.exceptions.DataIntegrityViolationException("Não é possível excluir uma categoria que possui produtos");
         }
+    }
+
+    public List<CategoriaEntity> findAll() {
+        return categoriaRepository.findAll();
     }
 }

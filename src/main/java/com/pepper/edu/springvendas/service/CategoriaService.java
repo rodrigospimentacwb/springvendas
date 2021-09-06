@@ -3,6 +3,7 @@ package com.pepper.edu.springvendas.service;
 import com.pepper.edu.springvendas.exceptions.ObjectNotFoundException;
 import com.pepper.edu.springvendas.model.CategoriaEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,5 +31,14 @@ public class CategoriaService {
     public CategoriaEntity update(CategoriaEntity categoria) {
         find(categoria.getId());
         return categoriaRepository.save(categoria);
+    }
+
+    public void delete(Integer id) {
+        find(id);
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new com.pepper.edu.springvendas.exceptions.DataIntegrityViolationException("Não é possível excluir uma categoria que possui produtos");
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.pepper.edu.springvendas.service;
 
+import com.pepper.edu.springvendas.controller.dto.CategoriaDTO;
 import com.pepper.edu.springvendas.exceptions.ObjectNotFoundException;
 import com.pepper.edu.springvendas.model.CategoriaEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
@@ -53,5 +54,9 @@ public class CategoriaService {
     public Page<CategoriaEntity> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    public CategoriaEntity fromDTO(CategoriaDTO dto){
+        return new CategoriaEntity(dto.getId(),dto.getNome());
     }
 }

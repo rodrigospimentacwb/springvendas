@@ -2,6 +2,9 @@ package com.pepper.edu.springvendas.controller.dto;
 
 import com.pepper.edu.springvendas.model.CategoriaEntity;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoriaDTO  implements Serializable {
@@ -9,6 +12,10 @@ public class CategoriaDTO  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Max(value = 80, message = "O tamanho deve ser de 5 a 80 caracteres")
+    @Min(value = 5, message = "O tamanho deve ser de 5 a 80 caracteres")
     private String nome;
 
     public CategoriaDTO() {

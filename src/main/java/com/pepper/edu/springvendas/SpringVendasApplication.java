@@ -69,6 +69,12 @@ public class SpringVendasApplication implements CommandLineRunner {
 
         CategoriaEntity cat1 = new CategoriaEntity(null, "Informática");
         CategoriaEntity cat2 = new CategoriaEntity(null, "Escritório");
+        CategoriaEntity cat3 = new CategoriaEntity(null, "Cama mesa e banho");
+        CategoriaEntity cat4 = new CategoriaEntity(null, "Eletrônicos");
+        CategoriaEntity cat5 = new CategoriaEntity(null, "Jardinagem");
+        CategoriaEntity cat6 = new CategoriaEntity(null, "Decoração");
+        CategoriaEntity cat7 = new CategoriaEntity(null, "Perfumaria");
+
 
         ProdutoEntity p1 = new ProdutoEntity(null, "Computador", 2000.0);
         ProdutoEntity p2 = new ProdutoEntity(null, "Impressora", 800.0);
@@ -81,7 +87,7 @@ public class SpringVendasApplication implements CommandLineRunner {
         p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
         p3.getCategorias().addAll(Arrays.asList(cat1));
 
-        categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
         EstadoEntity est1 = new EstadoEntity(null, "Minas Gerais");

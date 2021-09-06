@@ -4,6 +4,9 @@ import com.pepper.edu.springvendas.exceptions.ObjectNotFoundException;
 import com.pepper.edu.springvendas.model.CategoriaEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +48,10 @@ public class CategoriaService {
 
     public List<CategoriaEntity> findAll() {
         return categoriaRepository.findAll();
+    }
+
+    public Page<CategoriaEntity> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return categoriaRepository.findAll(pageRequest);
     }
 }

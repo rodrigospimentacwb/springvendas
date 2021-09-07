@@ -59,7 +59,7 @@ public class ClienteService {
             clienteRepository.deleteById(id);
         } catch (DataIntegrityViolationException e){
             throw new com.pepper.edu.springvendas.exceptions.DataIntegrityViolationException(
-                    "Não é possível excluir este cliente porque há entidades relacionadas");
+                    "Não é possível excluir este cliente porque há pedidos relacionados");
         }
     }
 

@@ -22,6 +22,7 @@
 ## Referencias:
 
 - [Curso Alura], professor Nelio Alves 
-
+- [Bean Validation], validações das APIs
 
 [Curso Alura]:(https://www.udemy.com/share/101sie3@vJyy66mrXydqQ7ganruCpNNgJpHxynkytTQ4UBK4qkYuN0CL-zXv2duOyVWnvt_y/)
+[Bean Validation]:(https://docs.oracle.com/javaee/7/tutorial/bean-validation001.htm)

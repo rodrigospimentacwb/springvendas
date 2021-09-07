@@ -1,34 +1,35 @@
 package com.pepper.edu.springvendas.controller.dto;
 
-import com.pepper.edu.springvendas.model.CategoriaEntity;
+import com.pepper.edu.springvendas.model.ClienteEntity;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class CategoriaDTO  implements Serializable {
+public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
 
     @NotEmpty(message = "Preenchimento obrigatório")
-    @Size(min = 5, max = 80, message = "O tamanho deve ter entre 5 à 80 caracteres")
+    @Size(min = 5, max = 80, message = "O tamanho deve ter entre 5 à 120 caracteres")
     private String nome;
 
-    public CategoriaDTO() {
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Email(message = "E-mail inválido")
+    private String email;
+
+    public ClienteDTO() {
     }
 
-    public CategoriaDTO(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public CategoriaDTO(CategoriaEntity obj) {
+    public ClienteDTO(ClienteEntity obj) {
         this.id = obj.getId();
         this.nome = obj.getNome();
+        this.email = obj.getEmail();
     }
 
     public Integer getId() {
@@ -45,5 +46,13 @@ public class CategoriaDTO  implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -1,22 +1,42 @@
 package com.pepper.edu.springvendas.controller.dto;
 
+import com.pepper.edu.springvendas.service.validation.ClienteInsert;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Size(min = 5, max = 80, message = "O tamanho deve ter entre 5 à 120 caracteres")
     private String nome;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Email(message = "E-mail inválido")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String logradouro;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String numero;
+
     private String complemento;
     private String bairro;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String cep;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String telefone1;
     private String telefone2;
     private String telefone3;

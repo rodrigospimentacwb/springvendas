@@ -1,6 +1,7 @@
 package com.pepper.edu.springvendas.controller.dto;
 
 import com.pepper.edu.springvendas.model.ClienteEntity;
+import com.pepper.edu.springvendas.service.validation.ClienteUpdate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -3,6 +3,7 @@ package com.pepper.edu.springvendas.service;
 import com.pepper.edu.springvendas.controller.dto.CategoriaDTO;
 import com.pepper.edu.springvendas.exceptions.ObjectNotFoundException;
 import com.pepper.edu.springvendas.model.CategoriaEntity;
+import com.pepper.edu.springvendas.model.ClienteEntity;
 import com.pepper.edu.springvendas.repository.CategoriaRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -34,8 +35,9 @@ public class CategoriaService {
     }
 
     public CategoriaEntity update(CategoriaEntity categoria) {
-        find(categoria.getId());
-        return categoriaRepository.save(categoria);
+        CategoriaEntity newObj = find(categoria.getId());
+        updateData(newObj, categoria);
+        return categoriaRepository.save(newObj);
     }
 
     public void delete(Integer id) {
@@ -58,5 +60,9 @@ public class CategoriaService {
 
     public CategoriaEntity fromDTO(CategoriaDTO dto){
         return new CategoriaEntity(dto.getId(),dto.getNome());
+    }
+
+    private void updateData(CategoriaEntity newObj, CategoriaEntity cliente) {
+        newObj.setNome(cliente.getNome());
     }
 }

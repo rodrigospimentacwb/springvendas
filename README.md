@@ -18,6 +18,7 @@
 - [ ] Adicionar banner do projeto
 - [ ] Verificar possibilidade de multimodulo
 - [ ] Adicionar libe tratamento de exceçoes
+- [ ] Organizar packages por dominio
 
 ## Referencias:
 

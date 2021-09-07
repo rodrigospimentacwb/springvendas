@@ -1,7 +1,7 @@
 package com.pepper.edu.springvendas.controller;
 
 import com.pepper.edu.springvendas.controller.dto.ClienteDTO;
-import com.pepper.edu.springvendas.model.ClienteEntity;
+import com.pepper.edu.springvendas.controller.dto.ClienteNewDTO;
 import com.pepper.edu.springvendas.model.ClienteEntity;
 import com.pepper.edu.springvendas.service.ClienteService;
 import org.springframework.data.domain.Page;
@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,15 @@ public class ClienteController {
     public ResponseEntity<ClienteEntity> find(@PathVariable Integer id){
         ClienteEntity cliente = clienteService.find(id);
         return ResponseEntity.ok().body(cliente);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert (@Valid @RequestBody ClienteNewDTO objDto){
+        ClienteEntity cliente = clienteService.fromDTO(objDto);
+        cliente = clienteService.insert(cliente);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
+                path("/{id}").buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

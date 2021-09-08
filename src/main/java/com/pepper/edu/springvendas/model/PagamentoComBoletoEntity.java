@@ -1,12 +1,14 @@
 package com.pepper.edu.springvendas.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.pepper.edu.springvendas.enums.EstadoPagamentoEnum;
 
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoletoEntity extends AbstractPagamentoEntity {
 
     @JsonFormat(pattern = "dd/MM/yyyy")

@@ -1,7 +1,7 @@
 package com.pepper.edu.springvendas.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.pepper.edu.springvendas.enums.EstadoPagamentoEnum;
 
 import javax.persistence.Entity;
@@ -17,7 +17,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "PAGAMENTO")
+// Criar a tabela das classes filhas, neste caso, uma tabela para cada. Single seria uma tabelas apenas
 @Inheritance(strategy = InheritanceType.JOINED)
+// Permitir quando passado json para esta abstrata decidir qual classe filha sera instanciada. Usar a JacksonConfig
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class AbstractPagamentoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

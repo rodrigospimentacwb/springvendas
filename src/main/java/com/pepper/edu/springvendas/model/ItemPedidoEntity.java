@@ -75,8 +75,16 @@ public class ItemPedidoEntity implements Serializable {
         return id.getPedido();
     }
 
+    public void setPedido(PedidoEntity pedido) {
+        id.setPedido(pedido);
+    }
+
     public ProdutoEntity getProduto(){
         return id.getProduto();
+    }
+
+    public void setProduto(ProdutoEntity produto) {
+        id.setProduto(produto);
     }
 
     @Override
